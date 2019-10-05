@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     mode: "development",
     entry: {
-        app: ['./src/app/App.tsx', 'webpack-hot-middleware/client'],
+        app: ['./src/app/App.tsx'],
         vendor: ['react', 'react-dom']
     },
     output: {
@@ -28,7 +28,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
           template: './src/app/index.html',
-        }),
-        new webpack.HotModuleReplacementPlugin()
+        })
     ]
 }
