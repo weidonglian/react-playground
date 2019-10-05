@@ -1,6 +1,5 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { Todos } from './components/Todos'
+import { Todos } from './Todos'
 
 export class App extends React.Component<{}> {
     render() {
@@ -13,4 +12,3 @@ export class App extends React.Component<{}> {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))

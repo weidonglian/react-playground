@@ -2,7 +2,7 @@
   "name": "first-react-ts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "webpack-dev-server --open",
     "devbuild": "webpack --mode development",
