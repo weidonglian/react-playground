@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Hello, HelloAlt } from './components/Hello'
 import { Todos } from './components/Todos'
 
 export class App extends React.Component<{}> {
