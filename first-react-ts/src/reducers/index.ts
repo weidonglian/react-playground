@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import * as fromTodos from './todos';
 
-export interface State {
-    todos: fromTodos.State
+export interface AppState {
+    todos: fromTodos.TodosState
 }
 
-export const initialState: State = {
-    todos: fromTodos.initialState
+export const initialAppState: AppState = {
+    todos: fromTodos.initialTodosState
 }
 
-export const reducer = combineReducers<State>({
+export const appReducer = combineReducers<AppState>({
     todos: fromTodos.reducer
 })

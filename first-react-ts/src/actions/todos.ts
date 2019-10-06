@@ -1,27 +1,27 @@
 import { Todo } from '../models'
-
+import { Action } from 'redux'
 /// Types
-export enum ActionTypes {
+export enum TodosActionTypes {
     ADD_TODO = '[todos] ADD_TODO',
     TOGGLE_TODO = '[todos] TOGGLE_TODO'
 }
 
 /// Actions
-export interface AddTodoAction {
-    type: ActionTypes.ADD_TODO,
+export interface AddTodoAction extends Action {
+    type: TodosActionTypes.ADD_TODO,
     payload: {
         todo: Todo
     }
 }
 
-export interface ToggleTodoAction {
-    type: ActionTypes.TOGGLE_TODO,
+export interface ToggleTodoAction extends Action {
+    type: TodosActionTypes.TOGGLE_TODO,
     payload: {
         todoId: number
     }
 }
 
-export type Action = AddTodoAction | ToggleTodoAction
+export type TodosAction = AddTodoAction | ToggleTodoAction
 
 /// Action creators
 
@@ -30,7 +30,7 @@ let nextId = 0
 
 export const addTodo = (name: string): AddTodoAction => {
     return {
-        type: ActionTypes.ADD_TODO,
+        type: TodosActionTypes.ADD_TODO,
         payload: {
             todo: {
                 id: nextId++,
@@ -43,7 +43,7 @@ export const addTodo = (name: string): AddTodoAction => {
 
 export const toggleTodo = (todoId: number): ToggleTodoAction => {
     return {
-        type: ActionTypes.TOGGLE_TODO,
+        type: TodosActionTypes.TOGGLE_TODO,
         payload: {
             todoId: todoId
         }

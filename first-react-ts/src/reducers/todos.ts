@@ -1,20 +1,20 @@
-import { Action, ActionTypes } from '../actions/todos';
+import { TodosAction, TodosActionTypes } from '../actions/todos';
 import { Todo } from '../models';
 
 /// state definition
-export interface State {
+export interface TodosState {
     todos: Todo[]
 }
 
 /// init state
-export const initialState: State = {
+export const initialTodosState: TodosState = {
     todos: []
 }
 
 /// reducer
-export const reducer = (state: State = initialState, action: Action): State => {
+export const reducer = (state: TodosState = initialTodosState, action: TodosAction): TodosState => {
     switch(action.type) {
-        case ActionTypes.ADD_TODO: {
+        case TodosActionTypes.ADD_TODO: {
             const { todo } = action.payload
             return {
                 ...state,
@@ -22,7 +22,7 @@ export const reducer = (state: State = initialState, action: Action): State => {
             }
         }
 
-        case ActionTypes.TOGGLE_TODO: {
+        case TodosActionTypes.TOGGLE_TODO: {
             const { todoId } = action.payload
             return {
                 ...state,
