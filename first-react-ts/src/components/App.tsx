@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { Todos } from './Todos'
+import React from 'react';
+import { Todos } from './Todos';
 
 export class App extends React.Component<{}> {
     render() {
@@ -7,7 +7,6 @@ export class App extends React.Component<{}> {
             <div>
                 <Todos />
             </div>
-
         )
     }
 }

@@ -1,6 +1,5 @@
-import { Action, ActionTypes } from '../actions/todos'
-import { Todo } from '../models/index'
-import { stat } from 'fs'
+import { Action, ActionTypes } from '../actions/todos';
+import { Todo } from '../models';
 
 /// state definition
 export interface State {
