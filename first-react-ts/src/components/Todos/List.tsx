@@ -1,14 +1,13 @@
-import * as React from 'react';
+import React from 'react'
 
-export interface TodosProps {
+export interface TodosListProps {
 
 }
 
-export class Todos extends React.PureComponent<TodosProps> {
+export class TodosList extends React.Component<TodosListProps> {
     render() {
         return (
             <React.Fragment>
-                <h1>My todo list</h1>
                 <ul>
                     <li>this is a</li>
                     <li>this is b</li>
