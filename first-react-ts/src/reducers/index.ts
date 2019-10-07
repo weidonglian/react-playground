@@ -10,5 +10,5 @@ export const initialAppState: AppState = {
 }
 
 export const appReducer = combineReducers<AppState>({
-    todos: fromTodos.reducer
+    todos: fromTodos.todosReducer
 })

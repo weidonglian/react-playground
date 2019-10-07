@@ -12,7 +12,7 @@ export const initialTodosState: TodosState = {
 }
 
 /// reducer
-export const reducer = (state: TodosState = initialTodosState, action: TodosAction): TodosState => {
+export const todosReducer = (state: TodosState = initialTodosState, action: TodosAction): TodosState => {
     switch(action.type) {
         case TodosActionTypes.ADD_TODO: {
             const { todo } = action.payload
@@ -26,7 +26,7 @@ export const reducer = (state: TodosState = initialTodosState, action: TodosActi
             const { todoId } = action.payload
             return {
                 ...state,
-                todos: state.todos.map(todo => todo.id == todoId ? { ...todo, done: !todo.done} : todo)
+                todos: state.todos.map(todo => todo.id === todoId ? { ...todo, done: !todo.done} : todo)
             }
         }
 
