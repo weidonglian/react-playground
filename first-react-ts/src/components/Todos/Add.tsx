@@ -1,16 +1,52 @@
 import React from 'react'
+import { Dispatch } from 'redux'
+import { addTodo } from '../../actions/todos';
+import { connect } from 'react-redux';
 
-export interface TodosAddProps {
-
+interface UiTodosAddProps {
+    add: (name: string) => void;
 }
 
-export class TodosAdd extends React.Component<TodosAddProps> {
+interface UiTodosAddState {
+    name: string
+}
+
+class UiTodosAdd extends React.PureComponent<UiTodosAddProps, UiTodosAddState> {
+    state: UiTodosAddState = {
+        name: ''
+    }
+
+    onInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        const val = evt.target.value;
+        this.setState((prevState: Readonly<UiTodosAddState>) => ({
+            ...prevState,
+            name: val
+        }));
+    }
+
+    onButtonSubmit = (evt: React.MouseEvent<HTMLButtonElement>) => {
+        evt.preventDefault();
+        this.props.add(this.state.name);
+    }
+
     render() {
+        const { add } = this.props;
+
         return (
-            <React.Fragment>
-                <h1>Add a new todo:</h1>
-                <input title='todo'></input>
-            </React.Fragment>
+            <div>
+                <h1>Add a new todo</h1>
+                <input value={this.state.name} onChange={this.onInputChange}></input>
+                <button onClick={e=>this.state.name && add(this.state.name)}>Add</button>
+            </div>
         )
     }
 }
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    add: (name: string) => dispatch(addTodo(name))
+});
+
+export const TodosAdd = connect(
+    null, mapDispatchToProps
+)(UiTodosAdd)
+
