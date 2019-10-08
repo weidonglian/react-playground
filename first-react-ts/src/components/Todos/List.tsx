@@ -14,7 +14,7 @@ interface UiTodoProps {
 const UiTodo = (props: UiTodoProps) => {
     const { todo, toggleTodo } = props;
     return (
-        <li key={todo.id} onClick={e=>toggleTodo(todo.id)}>
+        <li onClick={e=>toggleTodo(todo.id)}>
             {todo.name}
         </li>
     )
@@ -32,7 +32,7 @@ class UiTodosList extends React.PureComponent<UiTodosListProps> {
             <div>
                 {todos && todos.length > 0 ? (
                     <ul>
-                        {todos.map(todo => <UiTodo todo={todo} toggleTodo={toggleTodo} />)}
+                        {todos.map(todo => <UiTodo key={todo.id} todo={todo} toggleTodo={toggleTodo} />)}
                     </ul>
                 ) : (
                     <p>Nothing has been planed, add your first todo now.</p>
