@@ -3,43 +3,29 @@ import { connect } from 'react-redux';
 import { AppState } from '../../reducers';
 import { Todo } from '../../models';
 import { Dispatch } from 'redux';
-import { getTodos } from '../../selectors/todos';
+import { getTodos } from '../../selectors/notes';
 import { toggleTodo } from '../../actions/todos';
-
-interface UiTodoProps {
-    todo: Todo,
-    toggleTodo: (todoId: number) =>void
-}
-
-const UiTodo = (props: UiTodoProps) => {
-    const { todo, toggleTodo } = props;
-    return (
-        <li onClick={e=>toggleTodo(todo.id)}>
-            {todo.name}
-        </li>
-    )
-};
+import { FormGroup, FormControlLabel, Checkbox, Typography, Box } from '@material-ui/core'
 
 interface UiTodosListProps {
     todos: Todo[],
     toggleTodo: (todoId: number) => void
 }
 
-class UiTodosList extends React.PureComponent<UiTodosListProps> {
-    render() {
-        const { todos, toggleTodo } = this.props;
-        return (
-            <div>
+const UiTodosList = ({ todos, toggleTodo }: UiTodosListProps) => {
+    return (
+        <Box m={2}>
+            <FormGroup>
                 {todos && todos.length > 0 ? (
-                    <ul>
-                        {todos.map(todo => <UiTodo key={todo.id} todo={todo} toggleTodo={toggleTodo} />)}
-                    </ul>
+                    todos.map(todo => <FormControlLabel key = {todo.id}
+                        control={<Checkbox checked={todo.done} onChange={() => toggleTodo(todo.id)} />}
+                        label={todo.name} />)
                 ) : (
-                    <p>Nothing has been planed, add your first todo now.</p>
-                )}
-            </div>
-        )
-    }
+                        <Typography variant='body1'>Nothing has been planed, add your first todo now. </Typography>
+                    )}
+            </FormGroup>
+        </Box>
+    )
 }
 
 const mapStateToProps = (appState: AppState) => ({

@@ -2,7 +2,7 @@ import React from 'react'
 import { TodosList } from '../components/Todos/List'
 import { TodosAdd } from '../components/Todos/Add'
 
-export class ScreenTodos extends React.Component {
+export class ScreenNotes extends React.Component {
     render() {
         return (
             <div>

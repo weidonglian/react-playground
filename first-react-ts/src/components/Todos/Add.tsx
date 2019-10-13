@@ -2,6 +2,7 @@ import React from 'react'
 import { Dispatch } from 'redux'
 import { addTodo } from '../../actions/todos';
 import { connect } from 'react-redux';
+import { Typography, IconButton, FormGroup } from '@material-ui/core'
 
 interface UiTodosAddProps {
     add: (name: string) => void;
@@ -33,11 +34,11 @@ class UiTodosAdd extends React.PureComponent<UiTodosAddProps, UiTodosAddState> {
         const { add } = this.props;
 
         return (
-            <div>
-                <h1>Add a new todo</h1>
+            <FormGroup>
+                <Typography variant='h3'>Add a new todo</Typography>
                 <input value={this.state.name} onChange={this.onInputChange}></input>
-                <button onClick={e=>this.state.name && add(this.state.name)}>Add</button>
-            </div>
+                <IconButton onClick={e=>this.state.name && add(this.state.name)}>Add</IconButton>
+            </FormGroup>
         )
     }
 }

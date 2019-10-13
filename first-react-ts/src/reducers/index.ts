@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import * as fromTodos from './todos';
+import { notesReducer, initialNotesState, NotesState } from './notes';
 
 export interface AppState {
-    todos: fromTodos.TodosState
+    notes: NotesState
 }
 
 export const initialAppState: AppState = {
-    todos: fromTodos.initialTodosState
+    notes: initialNotesState
 }
 
 export const appReducer = combineReducers<AppState>({
-    todos: fromTodos.todosReducer
+    notes: notesReducer
 })
