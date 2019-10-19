@@ -1,53 +1,66 @@
 import React from 'react'
 import { Dispatch } from 'redux'
-import { addTodo } from '../../actions/todos';
 import { connect } from 'react-redux';
-import { Typography, IconButton, FormGroup } from '@material-ui/core'
+import { Typography, InputBase, FormGroup, Theme } from '@material-ui/core'
+import { withStyles, WithStyles, createStyles } from '@material-ui/core'
 
-interface UiTodosAddProps {
-    add: (name: string) => void;
+const styles = (theme: Theme) => createStyles({
+    input: {
+        marginLeft: theme.spacing(2),
+        flex: 1,
+    },
+})
+
+interface UiTodosAddProps extends WithStyles<typeof styles> {
+    addTodo: (name: string) => void
 }
 
 interface UiTodosAddState {
     name: string
 }
 
-class UiTodosAdd extends React.PureComponent<UiTodosAddProps, UiTodosAddState> {
+export const UiTodosAdd = withStyles(styles)(
+class extends React.PureComponent<UiTodosAddProps, UiTodosAddState> {
     state: UiTodosAddState = {
         name: ''
     }
 
-    onInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-        const val = evt.target.value;
-        this.setState((prevState: Readonly<UiTodosAddState>) => ({
-            ...prevState,
-            name: val
-        }));
+    inputChanged = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            name: evt.target.value
+        })
     }
 
-    onButtonSubmit = (evt: React.MouseEvent<HTMLButtonElement>) => {
-        evt.preventDefault();
-        this.props.add(this.state.name);
+    keyPressed = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.keyCode == 13) { // Enter key
+            this.handleAdd()
+        }
+    }
+
+    handleAdd = () => {
+        if (this.state.name) {
+            this.props.addTodo(this.state.name)
+            this.setState({
+                name: ''
+            })
+        }
     }
 
     render() {
-        const { add } = this.props;
+        const { addTodo, classes } = this.props;
 
         return (
             <FormGroup>
-                <Typography variant='h3'>Add a new todo</Typography>
-                <input value={this.state.name} onChange={this.onInputChange}></input>
-                <IconButton onClick={e=>this.state.name && add(this.state.name)}>Add</IconButton>
+                <InputBase
+                    className={classes.input}
+                    placeholder="List item"
+                    inputProps={{ 'aria-label': 'list item' }}
+                    onKeyDown={this.keyPressed}
+                    value={this.state.name}
+                    onChange={this.inputChanged}
+                />
             </FormGroup>
         )
     }
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    add: (name: string) => dispatch(addTodo(name))
-});
-
-export const TodosAdd = connect(
-    null, mapDispatchToProps
-)(UiTodosAdd)
-
+)

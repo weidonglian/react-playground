@@ -5,8 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab'
 import IconButton from '@material-ui/core/IconButton'
-import AddIcon from '@material-ui/icons/Add'
 import MenuIcon from '@material-ui/icons/Menu'
+import { NotesAdd } from './Add'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,14 +18,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
-    },
-    fab: {
-      margin: theme.spacing(1),
     }
   }),
 )
 
-export const AppHeader = () => {
+export const NotesHeader = () => {
   const classes = useStyles()
 
   return (
@@ -36,11 +33,9 @@ export const AppHeader = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Todo
+            Notes
           </Typography>
-          <Fab color="secondary" aria-label="add" size="small" className={classes.fab}>
-            <AddIcon />
-          </Fab>
+          <NotesAdd></NotesAdd>
         </Toolbar>
       </AppBar>
     </div>
