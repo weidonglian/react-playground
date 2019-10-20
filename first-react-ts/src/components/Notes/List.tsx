@@ -1,28 +1,28 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { AppState } from '../../reducers'
-import { Note } from '../../models'
-import { Dispatch } from 'redux'
 import { makeStyles, Theme, Typography } from '@material-ui/core'
-import { UiTodosList } from '../Todos/List'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import React from 'react'
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
+import { addTodo, toggleTodo } from '../../actions/notes'
+import { Note } from '../../models'
+import { AppState } from '../../reducers'
 import { getNotes } from '../../selectors/notes'
-import { toggleTodo, addTodo } from '../../actions/notes'
 import { UiTodosAdd } from '../Todos/Add'
+import { UiTodosList } from '../Todos/List'
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
-      flexGrow: 1,
-      padding: theme.spacing(2)
+        flexGrow: 1,
+        padding: theme.spacing(2)
     },
     paper: {
-      minWidth: '120px',
-      padding: theme.spacing(2)
+        minWidth: '120px',
+        padding: theme.spacing(2)
     },
     control: {
-      padding: theme.spacing(2),
-    },
+        padding: theme.spacing(2)
+    }
 }))
 
 interface UiNotesListProps {
@@ -32,21 +32,22 @@ interface UiNotesListProps {
 }
 
 const UiNotesList = ({ notes, toggleTodo, addTodo }: UiNotesListProps) => {
-    const classes = useStyles();
+    const classes = useStyles()
     return (
-      <Grid container spacing={2} className={classes.root}>
-        {notes.map(note => (
-          <Grid key={note.id} item xs={4}>
-            <Paper className={classes.paper}>
-              <Typography variant='h5'>
-                {note.name}
-              </Typography>
-              <UiTodosList todos={note.todos} toggleTodo={(todoId: number) => toggleTodo(note.id, todoId)}></UiTodosList>
-              <UiTodosAdd addTodo={(todoName: string) => addTodo(note.id, todoName)}/>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+        <Grid container spacing={2} className={classes.root}>
+            {notes.map(note => (
+                <Grid key={note.id} item xs={4}>
+                    <Paper className={classes.paper}>
+                        <Typography variant='h5'>
+                            {note.name}
+                        </Typography>
+                        <UiTodosList todos={note.todos}
+                                     toggleTodo={(todoId: number) => toggleTodo(note.id, todoId)}/>
+                        <UiTodosAdd addTodo={(todoName: string) => addTodo(note.id, todoName)}/>
+                    </Paper>
+                </Grid>
+            ))}
+        </Grid>
     )
 }
 

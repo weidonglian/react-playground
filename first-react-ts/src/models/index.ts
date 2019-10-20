@@ -7,6 +7,7 @@ export interface Todo {
 export enum NoteVisibility {
     DEFAULT, PINNED, ARCHIEVE
 }
+
 export interface Note {
     id: number,
     name: string,

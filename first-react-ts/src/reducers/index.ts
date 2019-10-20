@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { notesReducer, initialNotesState, NotesState } from './notes';
+import { combineReducers } from 'redux'
+import { initialNotesState, notesReducer, NotesState } from './notes'
 
 export interface AppState {
     notes: NotesState

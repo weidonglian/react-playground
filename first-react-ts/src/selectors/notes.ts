@@ -1,5 +1,5 @@
-import { AppState } from '../reducers'
 import { createSelector } from 'reselect'
+import { AppState } from '../reducers'
 import { NotesState } from '../reducers/notes'
 
 const getNotesState = (state: AppState): NotesState => state.notes

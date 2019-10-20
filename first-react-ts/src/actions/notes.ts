@@ -1,6 +1,5 @@
-import { Note, NoteVisibility } from '../models'
-import { Todo } from '../models'
 import { Action } from 'redux'
+import { Note, NoteVisibility, Todo } from '../models'
 
 /// Types
 export enum NotesActionTypes {
@@ -84,7 +83,7 @@ export const addTodo = (noteId: number, name: string): AddTodoAction => {
             todo: {
                 id: nextTodoId++,
                 name: name,
-                done: false,
+                done: false
             }
         }
     }

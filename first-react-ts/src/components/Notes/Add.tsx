@@ -1,15 +1,29 @@
+import {
+    Button,
+    createStyles,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Fab,
+    TextField,
+    Theme,
+    withStyles,
+    WithStyles
+} from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
 import React from 'react'
 import { connect } from 'react-redux'
-import { Fab, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button } from '@material-ui/core'
-import { AppState } from '../../reducers'
-import { Note } from '../../models'
 import { Dispatch } from 'redux'
-import { getNotes } from '../../selectors/notes'
-import { toggleTodo, addNote } from '../../actions/notes'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import AddIcon from '@material-ui/icons/Add'
+import { addNote } from '../../actions/notes'
 
-interface UiNotesAddProps {
+const styles = (theme: Theme) => createStyles({
+    fab: {
+        margin: theme.spacing(1)
+    }
+})
+
+interface UiNotesAddProps extends WithStyles<typeof styles> {
     addNote: (name: string) => void
 }
 
@@ -17,12 +31,6 @@ interface UiNotesAddState {
     open: boolean,
     name: string
 }
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-    fab: {
-        margin: theme.spacing(1),
-    }
-}))
 
 
 class UiNotesAdd extends React.PureComponent<UiNotesAddProps, UiNotesAddState> {
@@ -38,7 +46,7 @@ class UiNotesAdd extends React.PureComponent<UiNotesAddProps, UiNotesAddState> {
     }
 
     handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        this.handleClose();
+        this.handleClose()
         const { name } = this.state
         const { addNote } = this.props
         if (name) {
@@ -55,16 +63,19 @@ class UiNotesAdd extends React.PureComponent<UiNotesAddProps, UiNotesAddState> {
     onClickAddNote = () => {
         this.setState({
             open: true,
-            name: '',
+            name: ''
         })
     }
 
     render() {
         const { open } = this.state
+        const { classes } = this.props
+
         return (
             <React.Fragment>
-                <Fab color="secondary" aria-label="add" size="small" onClick={this.onClickAddNote}>
-                    <AddIcon />
+                <Fab color="secondary" aria-label="add" size="small" className={classes.fab}
+                     onClick={this.onClickAddNote}>
+                    <AddIcon/>
                 </Fab>
 
                 <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
@@ -95,10 +106,10 @@ class UiNotesAdd extends React.PureComponent<UiNotesAddProps, UiNotesAddState> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    addNote: (name: string) => dispatch(addNote(name)),
+    addNote: (name: string) => dispatch(addNote(name))
 })
 
 export const NotesAdd = connect(
     null,
     mapDispatchToProps
-)(UiNotesAdd)
+)(withStyles(styles)(UiNotesAdd))

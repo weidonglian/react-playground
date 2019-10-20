@@ -1,6 +1,6 @@
-import { NotesAction, NotesActionTypes, addNote } from '../actions/notes';
-import { Note } from '../models';
 import iassign from 'immutable-assign'
+import { addNote, NotesAction, NotesActionTypes } from '../actions/notes'
+import { Note } from '../models'
 
 /// state definition
 export interface NotesState {
@@ -14,16 +14,16 @@ export const initialNotesState: NotesState = {
 
 /// reducer
 export const notesReducer = (state: NotesState = initialNotesState, action: NotesAction): NotesState => {
-    switch(action.type) {
+    switch (action.type) {
         case NotesActionTypes.ADD_TODO: {
             const { noteId, todo } = action.payload
             const noteIndex = state.notes.findIndex(note => note.id === noteId)
             if (noteIndex === -1) {
-                return state;
+                return state
             } else {
                 return iassign(state,
                     s => s.notes[noteIndex].todos,
-                    t => [ ...t, todo ]
+                    t => [...t, todo]
                 )
             }
         }
@@ -32,7 +32,7 @@ export const notesReducer = (state: NotesState = initialNotesState, action: Note
             const { noteId, todoId } = action.payload
             const noteIndex = state.notes.findIndex(note => note.id === noteId)
             if (noteIndex === -1) {
-                return state;
+                return state
             } else {
                 return iassign(state,
                     s => s.notes[noteIndex].todos[todoId],
@@ -59,7 +59,7 @@ export const notesReducer = (state: NotesState = initialNotesState, action: Note
             const { id, visibility } = action.payload
             const noteIndex = state.notes.findIndex(note => note.id === id)
             if (noteIndex === -1) {
-                return state;
+                return state
             } else {
                 return iassign(state,
                     s => s.notes[noteIndex],
