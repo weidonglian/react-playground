@@ -1,12 +1,13 @@
 import React from 'react'
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux';
-import { Typography, InputBase, FormGroup, Theme } from '@material-ui/core'
+import { Typography, InputBase, FormGroup, Theme, IconButton, InputAdornment } from '@material-ui/core'
 import { withStyles, WithStyles, createStyles } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = (theme: Theme) => createStyles({
     input: {
-        marginLeft: theme.spacing(2),
+        // marginLeft: theme.spacing(2),
         flex: 1,
     },
 })
@@ -50,16 +51,21 @@ class extends React.PureComponent<UiTodosAddProps, UiTodosAddState> {
         const { addTodo, classes } = this.props;
 
         return (
-            <FormGroup>
+            <React.Fragment>
                 <InputBase
                     className={classes.input}
-                    placeholder="List item"
-                    inputProps={{ 'aria-label': 'list item' }}
                     onKeyDown={this.keyPressed}
                     value={this.state.name}
                     onChange={this.inputChanged}
+                    placeholder="Add list item here"
+                    inputProps={{ 'aria-label': 'add list item here' }}
+                    startAdornment={
+                        <InputAdornment position="start">
+                          <AddIcon color='disabled' />
+                        </InputAdornment>
+                    }
                 />
-            </FormGroup>
+            </React.Fragment>
         )
     }
 }

@@ -8,8 +8,6 @@ interface UiTodosListProps {
 }
 
 export const UiTodosList = ({ todos, toggleTodo }: UiTodosListProps) => {
-
-    // const classes = useStyles()
     return (
         <Box p={0}>
             <FormGroup>

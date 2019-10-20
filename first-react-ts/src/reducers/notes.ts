@@ -23,7 +23,7 @@ export const notesReducer = (state: NotesState = initialNotesState, action: Note
             } else {
                 return iassign(state,
                     s => s.notes[noteIndex].todos,
-                    t => ({ ...t, todo })
+                    t => [ ...t, todo ]
                 )
             }
         }
@@ -36,7 +36,10 @@ export const notesReducer = (state: NotesState = initialNotesState, action: Note
             } else {
                 return iassign(state,
                     s => s.notes[noteIndex].todos[todoId],
-                    t => (t.done = !t.done, t)
+                    t => {
+                        t.done = !t.done
+                        return t
+                    }
                 )
             }
         }
@@ -45,7 +48,10 @@ export const notesReducer = (state: NotesState = initialNotesState, action: Note
             const { note } = action.payload
             return iassign(state,
                 s => s.notes,
-                n => (n.push(note), n)
+                n => {
+                    n.push(note)
+                    return n
+                }
             )
         }
 
@@ -57,7 +63,10 @@ export const notesReducer = (state: NotesState = initialNotesState, action: Note
             } else {
                 return iassign(state,
                     s => s.notes[noteIndex],
-                    n => (n.visibility = visibility, n)
+                    n => {
+                        n.visibility = visibility
+                        return n
+                    }
                 )
             }
         }
