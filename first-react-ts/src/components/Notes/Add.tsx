@@ -79,7 +79,7 @@ class UiNotesAdd extends React.PureComponent<UiNotesAddProps, UiNotesAddState> {
                 </Fab>
 
                 <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Add new note</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Create a new note:</DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
@@ -96,7 +96,7 @@ class UiNotesAdd extends React.PureComponent<UiNotesAddProps, UiNotesAddState> {
                             Cancel
                         </Button>
                         <Button onClick={this.handleSubmit} color="primary">
-                            Submit
+                            OK
                         </Button>
                     </DialogActions>
                 </Dialog>

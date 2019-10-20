@@ -31,17 +31,14 @@ export const notesReducer = (state: NotesState = initialNotesState, action: Note
         case NotesActionTypes.TOGGLE_TODO: {
             const { noteId, todoId } = action.payload
             const noteIndex = state.notes.findIndex(note => note.id === noteId)
-            if (noteIndex === -1) {
-                return state
-            } else {
-                return iassign(state,
-                    s => s.notes[noteIndex].todos[todoId],
-                    t => {
-                        t.done = !t.done
-                        return t
-                    }
-                )
-            }
+            const todoIndex = state.notes[noteIndex].todos.findIndex(todo => todo.id === todoId)
+            return iassign(state,
+                s => s.notes[noteIndex].todos[todoIndex],
+                t => {
+                    t.done = !t.done
+                    return t
+                }
+            )
         }
 
         case NotesActionTypes.ADD_NOTE: {
