@@ -18,7 +18,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     paper: {
         minWidth: '120px',
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+        '&:hover': {
+            borderStyle: 'solid'
+        }
     },
     control: {
         padding: theme.spacing(2)
@@ -32,18 +35,21 @@ interface UiNotesListProps {
 }
 
 const UiNotesList = ({ notes, toggleTodo, addTodo }: UiNotesListProps) => {
+
     const classes = useStyles()
+    const [editingNoteId, setEditingNoteId] = React.useState(-1)
+
     return (
         <Grid container spacing={2} className={classes.root}>
             {notes.map(note => (
                 <Grid key={note.id} item xs={4}>
-                    <Paper className={classes.paper}>
+                    <Paper className={classes.paper} onMouseEnter={() => setEditingNoteId(note.id)} onMouseLeave={() => setEditingNoteId(-1)}>
                         <Typography variant='h5'>
                             {note.name}
                         </Typography>
                         <UiTodosList todos={note.todos}
                                      toggleTodo={(todoId: number) => toggleTodo(note.id, todoId)}/>
-                        <UiTodosAdd addTodo={(todoName: string) => addTodo(note.id, todoName)}/>
+                        {editingNoteId === note.id && <UiTodosAdd addTodo={(todoName: string) => addTodo(note.id, todoName)}/>}
                     </Paper>
                 </Grid>
             ))}
